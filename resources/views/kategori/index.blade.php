@@ -12,5 +12,20 @@
         <tbody>
           
         </tbody>
+        @foreach($allKategori as $key => $r)
+        <tr>
+            <td>{{ $key + 1 }}</td>
+            <td>{{ $r->nama_kategori }}</td>
+            <td>
+                    <form action="{{ route('kategori.destroy', $r->id) }}" method="POST">
+                      <a href="{{ route('kategori.show', $r->id) }}" class="tombol">Detail</a>
+                      <a href="{{ route('kategori.edit', $r->id) }}" class="tombol">Edit</a>
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="tombol">Hapus</button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
     </table>
 @include('layout.footer')

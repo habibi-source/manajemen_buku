@@ -60,7 +60,7 @@ class KategoriController extends Controller
      */
     public function update(Request $request, Kategori $kategori)
     {
-        $request->validate(['nama_kategori'=>'required|max:255',
+        $validatedData = $request->validate(['nama_kategori'=>'required|max:255',
         ]);
         $kategori->update($validatedData);
         return redirect()->route('kategori.index')->with('succes','Kategori berhasil diupdate');
@@ -72,6 +72,6 @@ class KategoriController extends Controller
     public function destroy(Kategori $kategori)
     {
         $kategori->delete();
-        return redirect()->route('kategori.index')->with('succes','kategori berhasil dihapus');
+        return redirect()->route('kategori.index')->with('succes','Kategori berhasil dihapus');
     }
 }
