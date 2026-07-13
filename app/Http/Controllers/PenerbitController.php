@@ -30,25 +30,28 @@ class PenerbitController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+public function store(Request $request)
+{
+    $validatedData = $request->validate([
+        'nama_penerbit' => 'required|string|max:100', // max 100 sesuai migration Anda
+    ]);
+    Penerbit::create($validatedData);
+    return redirect()->route('penerbit.index')->with('success', 'Penerbit berhasil ditambahkan');
+}
 
     /**
      * Display the specified resource.
      */
     public function show(Penerbit $penerbit)
     {
-        //
+      return view('penerbit.show', compact('penerbit'));
     }
-
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Penerbit $penerbit)
     {
-        //
+      return view('penerbit.edit', compact('penerbit'));
     }
 
     /**
@@ -56,7 +59,13 @@ class PenerbitController extends Controller
      */
     public function update(Request $request, Penerbit $penerbit)
     {
-        //
+     $validatedData = $request->validate([
+        'nama_penerbit' => 'required|max:100', // sesuaikan max dengan migration
+    ]);
+
+    $penerbit->update($validatedData);
+
+    return redirect()->route('penerbit.index')->with('success', 'Penerbit berhasil diupdate');
     }
 
     /**
@@ -64,6 +73,7 @@ class PenerbitController extends Controller
      */
     public function destroy(Penerbit $penerbit)
     {
-        //
+        $penerbit->delete();
+        return redirect()->route('penerbit.index')->with('success', 'Penerbit berhasil dihapus');
     }
 }

@@ -35,7 +35,7 @@ class KategoriController extends Controller
             'nama_kategori' => 'required|max:255',
         ]);
         Kategori::create($validatedData);
-    return redirect()->route('kategori.index')->with('succes','Kategori berhasil ditambahkan');
+    return redirect()->route('kategori.index')->with('success','Kategori berhasil ditambahkan');
     }
 
     /**
